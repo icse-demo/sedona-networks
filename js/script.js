@@ -193,24 +193,60 @@ function displaySuccessMessage() {
 
 /* --- Signup flow: validate, show loading, then embedded signing iframe --- */
 function displayClickwrap() {
-  var EMAIL_ADDRESS = document.getElementById("email-address").value.trim();
-  var PASSWORD = document.getElementById('password').value.trim();
+  var emailEl = document.getElementById('signup-email') || document.getElementById('email-address');
+  var passwordEl = document.getElementById('password');
+  var companyEl = document.getElementById('signup-company');
+  var fullnameEl = document.getElementById('signup-fullname');
 
-  if (!PASSWORD || !EMAIL_ADDRESS) {
-    alert("Please fill in all required fields");
-    
-    if (!EMAIL_ADDRESS) document.getElementById("email-address").focus();
-    else if (!PASSWORD) document.getElementById('password').focus();
+  var EMAIL_ADDRESS = emailEl ? emailEl.value.trim() : '';
+  var PASSWORD = passwordEl ? passwordEl.value.trim() : '';
 
-    return; 
+  /* Signup page: company, full name, email (no password field). */
+  if (companyEl && fullnameEl && emailEl) {
+    var company = companyEl.value.trim();
+    var fullname = fullnameEl.value.trim();
+    if (!company || !fullname || !EMAIL_ADDRESS) {
+      alert('Please fill in all required fields');
+      if (!company) {
+        companyEl.focus();
+      } else if (!fullname) {
+        fullnameEl.focus();
+      } else {
+        emailEl.focus();
+      }
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(EMAIL_ADDRESS)) {
+      alert('Please enter a valid email address');
+      emailEl.focus();
+      return;
+    }
+  } else if (emailEl && passwordEl) {
+    /* Legacy form: email + password */
+    if (!PASSWORD || !EMAIL_ADDRESS) {
+      alert('Please fill in all required fields');
+      if (!EMAIL_ADDRESS) {
+        emailEl.focus();
+      } else {
+        passwordEl.focus();
+      }
+      return;
+    }
+  } else if (emailEl) {
+    if (!EMAIL_ADDRESS) {
+      alert('Please fill in all required fields');
+      emailEl.focus();
+      return;
+    }
+  } else {
+    alert('Please fill in all required fields');
+    return;
   }
 
   if (!CLICKWRAP_ACCEPTED) {
     alert("Please accept our terms and conditions");
     return;
   }
-
-  displaySuccessMessage();
 
   const elementsToRemove = document.querySelectorAll('.card');
   elementsToRemove.forEach(function(element) {
@@ -274,6 +310,23 @@ function displayClickwrap() {
           alert(`Error: ${error.message}`);
           stopLoading(loadingContainer);
       });
+}
+
+/* After embedded signing completes, Ironclad enables #submit-button; then go to success page */
+function initSignupSignatureSubmitRedirect() {
+  var submitBtn = document.getElementById('submit-button');
+  if (!submitBtn) {
+    return;
+  }
+  submitBtn.addEventListener('click', function () {
+    window.location.href = 'success.html';
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSignupSignatureSubmitRedirect);
+} else {
+  initSignupSignatureSubmitRedirect();
 }
 
 /* --- Password visibility toggle (login/signup) --- */
