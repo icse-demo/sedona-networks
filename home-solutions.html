@@ -14,15 +14,25 @@
         <a href="index.html" class="header-logo">
             <img src="assets/LogoFlat.svg" alt="">
         </a>
-        <nav class="site-nav">
-            <a href="business-solutions.html">Business Solutions</a>
-            <a href="home-solutions.html" class="nav-active">Home Solutions</a>
-            <a href="security.html">Security</a>
-            <a href="partners.html">Partners</a>
-        </nav>
-        <div class="header-actions">
-            <a href="login.html" class="btn-login">Login</a>
-            <a href="signup.html" class="btn-create">Create Account</a>
+        <button type="button" class="nav-menu-toggle" id="site-nav-toggle" aria-expanded="false" aria-controls="site-header-panel">
+            <span class="nav-menu-toggle-box" aria-hidden="true">
+                <span class="nav-menu-toggle-bar"></span>
+                <span class="nav-menu-toggle-bar"></span>
+                <span class="nav-menu-toggle-bar"></span>
+            </span>
+            <span class="visually-hidden">Menu</span>
+        </button>
+        <div id="site-header-panel" class="site-header-panel">
+            <nav class="site-nav" aria-label="Primary">
+                <a href="business-solutions.html">Business Solutions</a>
+                <a href="home-solutions.html" class="nav-active">Home Solutions</a>
+                <a href="security.html">Security</a>
+                <a href="partners.html">Partners</a>
+            </nav>
+            <div class="header-actions">
+                <a href="login.html" class="btn-login">Login</a>
+                <a href="signup.html" class="btn-create">Create Account</a>
+            </div>
         </div>
     </header>
 
@@ -104,6 +114,7 @@
         </div>
     </footer>
 
+    <script src="js/site-nav.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
