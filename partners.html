@@ -82,28 +82,87 @@
         </div>
     </section>
 
-    <!-- Partner form skeleton (layout only; no form logic) -->
+    <!-- Sedona Partner Form (same patterns as signup; Submit → embedded signing) -->
     <section id="partner-form" class="partners-form-section">
-        <div class="partner-form-skeleton">
-            <h2 class="skeleton-title">Sedona Partner Form</h2>
-            <div class="skeleton-row">
-                <span class="skeleton-label"></span>
-                <div class="skeleton-block"></div>
-            </div>
-            <div class="skeleton-row">
-                <span class="skeleton-label"></span>
-                <div class="skeleton-block"></div>
-            </div>
-            <div class="skeleton-row">
-                <span class="skeleton-label"></span>
-                <div class="skeleton-block"></div>
-            </div>
-            <div class="skeleton-row">
-                <span class="skeleton-region-label">Select Your Region(s)</span>
-                <div class="skeleton-block"></div>
-            </div>
+        <div class="partner-form-card card">
+            <h2 class="partner-form-title">Sedona Partner Form</h2>
+            <p class="partner-form-intro">Tell us about your organization and the regions you cover. You’ll review and sign our partner agreement next.</p>
+            <form class="partner-form" id="partner-application-form">
+                <div class="form-item">
+                    <label for="partner-company">Company name</label>
+                    <div class="input-group">
+                        <input id="partner-company" name="company" type="text" autocomplete="organization" placeholder="Enter your company name" required>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label for="partner-fullname">Full name</label>
+                    <div class="input-group">
+                        <input id="partner-fullname" name="fullname" type="text" autocomplete="name" placeholder="Enter your first and last name" required>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label for="partner-email">Email address</label>
+                    <div class="input-group">
+                        <input id="partner-email" name="email" type="email" autocomplete="email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+                <fieldset class="partner-region-fieldset">
+                    <legend class="partner-region-legend">Regions (select all that apply)</legend>
+                    <ul class="partner-region-list">
+                        <li>
+                            <label class="partner-region-label">
+                                <input type="checkbox" name="partner-region" value="North America">
+                                North America
+                            </label>
+                        </li>
+                        <li>
+                            <label class="partner-region-label">
+                                <input type="checkbox" name="partner-region" value="LATAM">
+                                LATAM
+                            </label>
+                        </li>
+                        <li>
+                            <label class="partner-region-label">
+                                <input type="checkbox" name="partner-region" value="EMEA">
+                                EMEA
+                            </label>
+                        </li>
+                        <li>
+                            <label class="partner-region-label">
+                                <input type="checkbox" name="partner-region" value="APAC">
+                                APAC
+                            </label>
+                        </li>
+                    </ul>
+                </fieldset>
+                <div class="clickwrap-container">
+                    <iframe id="my-iframe" src="https://demo.ironcladapp.com/clickwrap/698e55239f0b9d55d4bffdf0?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmFtZUFuY2VzdG9ycyI6WyJodHRwczovL2ljc2UtZGVtby5naXRodWIuaW8iXSwiaWF0IjoxNzczOTQyMzI0fQ.hSpWXVvhJMco8Q-MyRV0DIkeHAnPsKFre68jCU_IgMY&parent=https://icse-demo.github.io" title="Terms and conditions"></iframe>
+                    <svg viewBox="0 0 136 152" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0.957442V15.2965C0 15.6948 0.398307 16.0931 0.796615 16.0931H59.7461V135.585H0.796615C0.398307 135.585 0 135.983 0 136.382V150.721C0 151.119 0.398307 151.517 0.796615 151.517H134.628C135.026 151.517 135.424 151.119 135.424 150.721V136.382C135.424 135.983 135.026 135.585 134.628 135.585H75.6784V16.0931H134.628C135.026 16.0931 135.424 15.6948 135.424 15.2965V0.957442C135.424 0.559135 135.026 0.160828 134.628 0.160828H0.796615C0.398307 0.160828 0 0.559135 0 0.957442ZM98.3816 34.0175H94.3992C94.0008 34.0175 93.6025 34.4158 93.6025 34.8141V116.865C93.6025 117.264 94.0008 117.662 94.3992 117.662H108.738C108.742 117.662 108.745 117.662 108.749 117.662H134.628C135.026 117.662 135.424 117.264 135.424 116.865V102.526C135.424 102.128 135.026 101.73 134.628 101.73H109.535V49.9498H134.628C135.026 49.9498 135.424 49.5515 135.424 49.1532V34.8141C135.424 34.4158 135.026 34.0175 134.628 34.0175H108.738H98.3816ZM37.0426 34.0175H41.0258C41.4241 34.0175 41.8224 34.4158 41.8224 34.8141V116.865C41.8224 117.264 41.4241 117.662 41.0258 117.662H26.6868L26.6763 117.662H0.796614C0.398307 117.662 0 117.264 0 116.865V102.526C0 102.128 0.398307 101.73 0.796614 101.73H25.8901V49.9498H0.796614C0.398307 49.9498 0 49.5515 0 49.1532V34.8141C0 34.4158 0.398307 34.0175 0.796614 34.0175H26.6868H37.0426Z" fill="#00CA88"/>
+                    </svg>
+                </div>
+                <button type="button" class="btn-primary" id="btn-partner-submit">Submit</button>
+            </form>
         </div>
     </section>
+
+    <!-- Ironclad embedded signing (same flow as signup embedded path) -->
+    <div id="iframe-container">
+        <iframe id="signature-iframe" src="" title="Signature"></iframe>
+        <button id="submit-button" disabled>Submit</button>
+    </div>
+
+    <div id="loading-container">
+        <div class="loading-box">
+            <div class="loader">
+                <span></span><span></span><span></span>
+            </div>
+            <div class="progress-bar-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+            <p id="loading-message"></p>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="site-footer">
@@ -155,5 +214,7 @@
 
     <script src="js/site-nav.js"></script>
     <script src="js/site-ui.js"></script>
+    <script src="js/ironclad-clickwrap.js"></script>
+    <script src="js/partners-form.js"></script>
 </body>
 </html>

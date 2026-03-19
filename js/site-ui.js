@@ -4,10 +4,57 @@
  */
 
 /**
+ * Partner page: company, full name, email, at least one region checkbox.
+ * @returns {boolean}
+ */
+function validatePartnerForm() {
+  var companyEl = document.getElementById('partner-company');
+  var fullnameEl = document.getElementById('partner-fullname');
+  var emailEl = document.getElementById('partner-email');
+  if (!companyEl || !fullnameEl || !emailEl) {
+    return false;
+  }
+
+  var company = companyEl.value.trim();
+  var fullname = fullnameEl.value.trim();
+  var EMAIL_ADDRESS = emailEl.value.trim();
+
+  if (!company || !fullname || !EMAIL_ADDRESS) {
+    alert('Please fill in all required fields');
+    if (!company) {
+      companyEl.focus();
+    } else if (!fullname) {
+      fullnameEl.focus();
+    } else {
+      emailEl.focus();
+    }
+    return false;
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(EMAIL_ADDRESS)) {
+    alert('Please enter a valid email address');
+    emailEl.focus();
+    return false;
+  }
+
+  var regionChecked = document.querySelector('input[name="partner-region"]:checked');
+  if (!regionChecked) {
+    alert('Please select at least one region');
+    return false;
+  }
+
+  return true;
+}
+
+/**
  * Validates signup / legacy email fields before Ironclad flows. Returns false if invalid (alerts + focus).
  * @returns {boolean}
  */
 function validateClickwrapForm() {
+  if (document.getElementById('partner-email')) {
+    return validatePartnerForm();
+  }
+
   var emailEl = document.getElementById('signup-email') || document.getElementById('email-address');
   var passwordEl = document.getElementById('password');
   var companyEl = document.getElementById('signup-company');

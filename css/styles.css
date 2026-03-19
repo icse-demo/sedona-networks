@@ -1467,7 +1467,7 @@ html:has(.page-home) {
     color: #4a5568;
 }
 
-/* ========== Partners page (skeleton) ========== */
+/* ========== Partners page ========== */
 .page-partners {
     background: #0b1120;
     min-height: 100vh;
@@ -1618,47 +1618,95 @@ html:has(.page-home) {
     padding: 60px 24px 80px;
 }
 
-.partner-form-skeleton {
+.partner-form-card {
     max-width: 480px;
     margin: 0 auto;
     background: #fff;
     border-radius: 16px;
     padding: 40px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
 }
 
-.partner-form-skeleton .skeleton-title {
+.partner-form-title {
     font-size: 1.5rem;
     font-weight: 700;
     color: #1e293b;
+    margin: 0 0 12px;
+}
+
+.partner-form-intro {
+    font-size: 0.9375rem;
+    color: #64748b;
+    line-height: 1.55;
+    margin: 0 0 28px;
+}
+
+.page-partners .partner-form .form-item label {
+    color: #4a5568;
+}
+
+.page-partners .partner-form .input-group {
+    background: #fff;
+    border-color: #e2e8f0;
+}
+
+.partner-region-fieldset {
+    border: none;
     margin: 0 0 24px;
+    padding: 0;
 }
 
-.partner-form-skeleton .skeleton-block {
-    height: 48px;
-    background: #f1f5f9;
-    border-radius: 8px;
-    margin-bottom: 16px;
-}
-
-.partner-form-skeleton .skeleton-label {
-    height: 14px;
-    width: 40%;
-    background: #e2e8f0;
-    border-radius: 4px;
-    margin-bottom: 8px;
-}
-
-.partner-form-skeleton .skeleton-row {
-    margin-bottom: 20px;
-}
-
-.partner-form-skeleton .skeleton-region-label {
+.partner-region-legend {
     font-size: 14px;
     font-weight: 600;
     color: #475569;
     margin-bottom: 12px;
-    display: block;
+    padding: 0;
+}
+
+.partner-region-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.partner-region-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+    cursor: pointer;
+}
+
+.partner-region-label input {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    accent-color: #2563eb;
+}
+
+.page-partners .partner-form .btn-primary {
+    width: 100%;
+    margin-top: 8px;
+    background: #63b3ed;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.page-partners .partner-form .btn-primary:hover {
+    background: #4299e1;
 }
 
 /* ========== Home Solutions page ========== */
@@ -2249,7 +2297,11 @@ html:has(.page-home) {
         min-height: 48px;
     }
 
-    .partner-form-skeleton {
+    .partner-form-card {
         padding: clamp(24px, 6vw, 40px) clamp(16px, 5vw, 40px);
+    }
+
+    .page-partners .partner-form .input-group input {
+        font-size: 16px;
     }
 }

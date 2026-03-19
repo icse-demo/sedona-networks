@@ -212,7 +212,6 @@ function requestEmbeddedSigningUrl() {
 
 /**
  * Clickwrap acceptance only: same validation, terms check, card hide, and signature-iframe listener setup
- * as embedded signing, then success UI (no loading overlay, no API call).
  */
 function displayClickwrapClickToAccept() {
   if (typeof validateClickwrapForm !== 'function' || !validateClickwrapForm()) {
@@ -295,9 +294,4 @@ function displayClickwrapEmbeddedSigning() {
       alert('Error: ' + error.message);
       stopLoading(loadingContainer);
     });
-}
-
-/** @deprecated Use displayClickwrapEmbeddedSigning or displayClickwrapClickToAccept */
-function displayClickwrap() {
-  displayClickwrapEmbeddedSigning();
 }
