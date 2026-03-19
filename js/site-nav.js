@@ -1,6 +1,6 @@
 /**
  * Mobile primary navigation: toggle panel, aria state, scroll lock, close on navigate.
- * Does not modify Ironclad / script.js behavior.
+ * Does not modify Ironclad / site-ui.js behavior.
  */
 (function () {
   var header = document.querySelector('.site-header');

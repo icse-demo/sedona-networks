@@ -1125,7 +1125,7 @@ html:has(.page-home) {
     }
 }
 
-/* Scroll-triggered fade-in (used by script.js). */
+/* Scroll-triggered fade-in (used by site-ui.js). */
 .animate-on-scroll {
     opacity: 0;
     transform: translateY(24px);
