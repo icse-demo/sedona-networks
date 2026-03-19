@@ -1,4 +1,6 @@
-/* Centers the content inside the card and matches the 24px border radius */
+/**
+ * Success page – post-signup confirmation card and button.
+ */
 .success-card {
     background: #ffffff;
     border: 1px solid #e8e8e8;
@@ -49,7 +51,6 @@
     margin-bottom: 16px;
 }
 
-/* Optional: A nice little pop animation for the checkmark */
 @keyframes popIn {
     0% { transform: scale(0.5); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }

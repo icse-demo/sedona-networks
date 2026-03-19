@@ -1,3 +1,10 @@
+/**
+ * Sedona Networks – main site script.
+ * Contains: (1) Ironclad clickwrap / embedded signing – do not modify.
+ *          (2) Site UI: scroll animations, password toggle, loading/success.
+ */
+
+/* --- Ironclad clickwrap: constants and iframe messaging --- */
 const CLICKWRAP_IFRAME_ORIGIN = 'https://demo.ironcladapp.com';
 const WORKFLOW_TEMPLATE_ID = '698e55239f0b9d55d4bffdf0';
 
@@ -83,6 +90,7 @@ function handleCWMessage(message) {
   }
 }
 
+/* Attach message listener when clickwrap iframe is present and loaded. */
 const iframe = document.getElementById('my-iframe');
 if (iframe) {
     iframe.addEventListener("load", () => {
@@ -90,6 +98,7 @@ if (iframe) {
     });
 }
 
+/* --- Embedded signing: message handler (signature iframe) --- */
 function handleMessage(message) {
   console.log(message);
   switch (message.data.type) {
@@ -108,9 +117,9 @@ function handleMessage(message) {
   }
 }
 
-/**
- * Starts the loading animation and message rotation.
- */
+/* --- Loading overlay and success UI --- */
+
+/** Starts the loading animation and rotating messages. */
 function startLoading(loadingContainer, loadingMessage) {
     if (!loadingContainer || !loadingMessage) {
         console.error("Loading elements not found!");
@@ -160,9 +169,7 @@ function startLoading(loadingContainer, loadingMessage) {
     }, 4000); 
 }
 
-/**
- * Stops the loading animation and hides the container.
- */
+/** Stops the loading animation and hides the overlay. */
 function stopLoading(loadingContainer) {
     if (loadingContainer) {
         loadingContainer.classList.remove('show');
@@ -175,8 +182,6 @@ function displaySuccessMessage() {
         toast.classList.add("toast-message");
         toast.innerText = msg;
         document.body.appendChild(toast);
-        
-        // Redirect to success page after 3 seconds
         setTimeout(()=> {
           toast.remove();
           window.location.href = 'success.html';
@@ -186,6 +191,7 @@ function displaySuccessMessage() {
    showToast("Success!");
 }
 
+/* --- Signup flow: validate, show loading, then embedded signing iframe --- */
 function displayClickwrap() {
   var EMAIL_ADDRESS = document.getElementById("email-address").value.trim();
   var PASSWORD = document.getElementById('password').value.trim();
@@ -206,7 +212,6 @@ function displayClickwrap() {
 
   displaySuccessMessage();
 
-  // Hide the main login card
   const elementsToRemove = document.querySelectorAll('.card');
   elementsToRemove.forEach(function(element) {
     element.style.display = "none";
@@ -271,9 +276,8 @@ function displayClickwrap() {
       });
 }
 
-// Password Reveal Toggle Listener
+/* --- Password visibility toggle (login/signup) --- */
 document.addEventListener('click', function(event) {
-    // Looks for the updated class name
     const eyeIcon = event.target.closest('.input-suffix.eye-icon');
     
     if (eyeIcon) {
@@ -290,3 +294,30 @@ document.addEventListener('click', function(event) {
         }
     }
 });
+
+/* --- Scroll-triggered animations (home and other pages using .animate-on-scroll) --- */
+function initScrollAnimations() {
+  const elements = document.querySelectorAll('.animate-on-scroll');
+  if (!elements.length) return;
+
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  elements.forEach(function (el) {
+    observer.observe(el);
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initScrollAnimations);
+} else {
+  initScrollAnimations();
+}

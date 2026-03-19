@@ -2,92 +2,196 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Clickwrap Demo</title>
+    <title>Sedona Networks</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#0ed2f0">
+    <meta name="theme-color" content="#0b1120">
     <link rel="icon" href="./favicon-32x32.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body class="page-home">
+
+    <header class="site-header">
+        <a href="index.html" class="header-logo">
+            <img src="assets/LogoFlat.svg" alt="">
+        </a>
+        <nav class="site-nav">
+            <a href="business-solutions.html">Business Solutions</a>
+            <a href="home-solutions.html">Home Solutions</a>
+            <a href="security.html">Security</a>
+            <a href="partners.html">Partners</a>
+        </nav>
+        <div class="header-actions">
+            <a href="login.html" class="btn-login">Login</a>
+            <a href="signup.html" class="btn-create">Create Account</a>
+        </div>
+    </header>
 
     <main class="page-wrapper">
-        <div class="login-container">
-            
-            <div class="card" id="sign-in-card">
-                <h1 class="card-title">Sign In</h1>
-                
-                <form class="login-form">
-                    
-                    <div class="form-item">
-                        <label for="email-address">Email address</label>
-                        <div class="input-group">
-                            <span class="input-prefix">
-                                <svg viewBox="64 64 896 896" fill="currentColor" width="1em" height="1em">
-                                    <path d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"></path>
-                                </svg>
-                            </span>
-                            <input id="email-address" type="email" placeholder="Enter your email" required>
-                        </div>
+        <!-- Hero -->
+        <section class="hero">
+                <div class="hero-top animate-on-scroll">
+                    <h1 class="hero-title">
+                        Powering the Networks of the <span class="glitch-word hero-future-word">Future</span>
+                    </h1>
+                    <div class="hero-cta">
+                        <a href="signup.html" class="btn-primary-hero btn-hero-arrow">Sign up today</a>
                     </div>
+                </div>
+        </section>
 
-                    <div class="form-item">
-                        <label for="password">Password</label>
-                        <div class="input-group">
-                            <span class="input-prefix">
-                                <svg viewBox="64 64 896 896" fill="currentColor" width="1em" height="1em">
-                                    <path d="M832 464h-68V240c0-70.7-57.3-128-128-128H388c-70.7 0-128 57.3-128 128v224h-68c-17.7 0-32 14.3-32 32v384c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V496c0-17.7-14.3-32-32-32zM332 240c0-30.9 25.1-56 56-56h248c30.9 0 56 25.1 56 56v224H332V240zm460 600H232V536h560v304zM484 701v53c0 4.4 3.6 8 8 8h40c4.4 0 8-3.6 8-8v-53a48.01 48.01 0 10-56 0z"></path>
-                                </svg>
-                            </span>
-                            <input id="password" type="password" placeholder="Enter your password" required>
-                            <span class="input-suffix eye-icon">
-                                <svg viewBox="64 64 896 896" fill="currentColor" width="1em" height="1em">
-                                    <path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 000 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path>
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div class="clickwrap-container">
-                        <iframe id="my-iframe" src="{{ replace_ironclad_clickwrap_workflow_link }}&parent=https://icse-demo.github.io"></iframe>
-                        <svg viewBox="0 0 136 152" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0.957442V15.2965C0 15.6948 0.398307 16.0931 0.796615 16.0931H59.7461V135.585H0.796615C0.398307 135.585 0 135.983 0 136.382V150.721C0 151.119 0.398307 151.517 0.796615 151.517H134.628C135.026 151.517 135.424 151.119 135.424 150.721V136.382C135.424 135.983 135.026 135.585 134.628 135.585H75.6784V16.0931H134.628C135.026 16.0931 135.424 15.6948 135.424 15.2965V0.957442C135.424 0.559135 135.026 0.160828 134.628 0.160828H0.796615C0.398307 0.160828 0 0.559135 0 0.957442ZM98.3816 34.0175H94.3992C94.0008 34.0175 93.6025 34.4158 93.6025 34.8141V116.865C93.6025 117.264 94.0008 117.662 94.3992 117.662H108.738C108.742 117.662 108.745 117.662 108.749 117.662H134.628C135.026 117.662 135.424 117.264 135.424 116.865V102.526C135.424 102.128 135.026 101.73 134.628 101.73H109.535V49.9498H134.628C135.026 49.9498 135.424 49.5515 135.424 49.1532V34.8141C135.424 34.4158 135.026 34.0175 134.628 34.0175H108.738H98.3816ZM37.0426 34.0175H41.0258C41.4241 34.0175 41.8224 34.4158 41.8224 34.8141V116.865C41.8224 117.264 41.4241 117.662 41.0258 117.662H26.6868L26.6763 117.662H0.796614C0.398307 117.662 0 117.264 0 116.865V102.526C0 102.128 0.398307 101.73 0.796614 101.73H25.8901V49.9498H0.796614C0.398307 49.9498 0 49.5515 0 49.1532V34.8141C0 34.4158 0.398307 34.0175 0.796614 34.0175H26.6868H37.0426Z" fill="#00CA88"/>
-                        </svg>
-                    </div>
-
-                    <button type="button" class="btn-primary" onclick="event.preventDefault(); displayClickwrap()">Sign In</button>
-
-                    <div class="form-footer-links">
-                        <span>New here?</span>
-                        <a href="#">Create an Account</a>
-                    </div>
-                </form>
-                
-                <div class="auth-helper-links">
-                    <a href="#">Forgot Password</a>
-                    <a href="#">Resend Activation Email</a>
+        <!-- Section: Learn more + dashboard mockup -->
+        <section class="section-choice" id="learn">
+            <div class="section-inner">
+                <div class="animate-on-scroll">
+                    <h2 class="section-headline">The smart choice for all networking solutions</h2>
+                    <p class="section-body">Internet when and where you need it. Sedona's hardware and software makes it easy for people to stay connected, whether you are a business providing access to your customers, an enterprise needing secure networks, or are just sitting at home browsing the web.</p>
+                    <p class="section-stat">844M+ devices</p>
+                    <p class="section-stat">99.9% uptime</p>
+                </div>
+                <div class="section-choice-visual animate-on-scroll">
+                    <img
+                        class="section-choice-img"
+                        src="assets/UI2x_1-p-1080.png"
+                        srcset="assets/UI2x_1-p-800.png 800w, assets/UI2x_1-p-1080.png 1080w, assets/UI2x_1-p-1600.png 1600w, assets/UI2x_1.png 2000w"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        width="1080"
+                        height="720"
+                        alt="Network operations dashboard with metrics and charts"
+                        loading="lazy"
+                        decoding="async">
                 </div>
             </div>
-            
-        </div>
+        </section>
+
+        <!-- Partner logos carousel (dark band only) -->
+        <section class="section-carousel-strip" aria-label="Partner logos">
+            <div class="logo-carousel-wrap">
+                <div class="logo-carousel" aria-hidden="true">
+                    <img src="assets/log-1.svg" alt="">
+                    <img src="assets/log-2.svg" alt="">
+                    <img src="assets/log-3.svg" alt="">
+                    <img src="assets/log-4.svg" alt="">
+                    <img src="assets/log-5.svg" alt="">
+                    <img src="assets/log-6.svg" alt="">
+                    <img src="assets/log-7.svg" alt="">
+                    <img src="assets/log-8.svg" alt="">
+                    <img src="assets/log-1.svg" alt="">
+                    <img src="assets/log-2.svg" alt="">
+                    <img src="assets/log-3.svg" alt="">
+                    <img src="assets/log-4.svg" alt="">
+                    <img src="assets/log-5.svg" alt="">
+                    <img src="assets/log-6.svg" alt="">
+                    <img src="assets/log-7.svg" alt="">
+                    <img src="assets/log-8.svg" alt="">
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA: free trial (white section, below carousel) -->
+        <section class="section-cta-light">
+            <div class="cta-two-col cta-two-col--constrained">
+                <div class="animate-on-scroll">
+                    <h2 class="cta-headline">Sign up for a free trial</h2>
+                    <p class="cta-body">Monitor your bandwidth, manage your devices, and create advanced security controls with cutting edge, mobile-first technology.</p>
+                    <a href="signup.html" class="btn-primary-hero btn-hero-arrow">Get started for free</a>
+                </div>
+                <div class="animate-on-scroll cta-media-col">
+                    <div class="cta-media">
+                        <img
+                            class="cta-media-img"
+                            src="assets/Man_phone_1Man_phone.webp"
+                            alt="Person using mobile service in an urban setting"
+                            width="800"
+                            height="1000"
+                            loading="lazy"
+                            decoding="async">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Become a partner: navy band, image + metrics (links to partners) -->
+        <section class="section-partner-cta" aria-labelledby="partner-cta-heading">
+            <div class="section-partner-cta-inner">
+                <h2 id="partner-cta-heading" class="section-partner-heading animate-on-scroll">Become a partner</h2>
+                <div class="section-partner-grid">
+                    <div class="section-partner-media animate-on-scroll">
+                        <img
+                            src="assets/partner22x_1partner2@2x.webp"
+                            alt="Field technician in a hard hat working on network wiring"
+                            width="800"
+                            height="600"
+                            loading="lazy"
+                            decoding="async">
+                    </div>
+                    <div class="section-partner-stats animate-on-scroll">
+                        <div class="partner-stat-row">
+                            <span class="partner-stat-value">+200</span>
+                            <p class="partner-stat-text"><strong>Products</strong> – Wide range of product and software offerings</p>
+                        </div>
+                        <div class="partner-stat-row">
+                            <span class="partner-stat-value">1.5k</span>
+                            <p class="partner-stat-text"><strong>Enterprise Customers</strong> – Thousands of customers who need certified assistance in setting up and securing their networks</p>
+                        </div>
+                        <div class="partner-stat-row">
+                            <span class="partner-stat-value">95%</span>
+                            <p class="partner-stat-text"><strong>Customer Retention</strong> – Customers love Sedona Networks’ offerings enough to renew and upgrade</p>
+                        </div>
+                        <a href="partners.html" class="btn-partner-learn-more">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-bar"></div>
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo">
+                        <img src="assets/LogoFlat-Dark.svg" alt="">
+                    </a>
+                    <p class="footer-desc">Meet Sedona Networks. Powering the networks of the future. Software and hardware to keep you, your business, and your customers connected.</p>
+                </div>
+                <div class="footer-nav">
+                    <div class="footer-col">
+                        <h4>Business Solutions</h4>
+                        <ul>
+                            <li><a href="business-solutions.html">Products</a></li>
+                            <li><a href="partners.html">Reseller Program</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Home Solutions</h4>
+                        <ul>
+                            <li><a href="home-solutions.html">Features</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Security</h4>
+                        <ul>
+                            <li><a href="security.html">Security</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Partners</h4>
+                        <ul>
+                            <li><a href="partners.html">Become a Partner</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-social">
+                    <div class="social-links">
+                        <a href="#facebook" aria-label="Facebook"><img src="assets/ic-facebook-white.svg" alt=""></a>
+                        <a href="#instagram" aria-label="Instagram"><img src="assets/ic-instagram-white.svg" alt=""></a>
+                        <a href="#twitter" aria-label="Twitter"><img src="assets/ic-twitter-white.svg" alt=""></a>
+                        <a href="#linkedin" aria-label="LinkedIn"><img src="assets/ic-linkedin-white.svg" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </main>
 
-    <div id="iframe-container">
-        <iframe id="signature-iframe" src=""></iframe>
-        <button id="submit-button" disabled>Submit</button>
-    </div>
-    
-    <div id="loading-container">
-        <div class="loading-box">
-            <div class="loader">
-                <span></span><span></span><span></span>
-            </div>
-            <div class="progress-bar-container">
-                <div id="progress-bar" class="progress-bar"></div>
-            </div>
-            <p id="loading-message"></p>
-        </div>
-    </div>
-    
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Business Solutions - Sedona Networks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="./favicon-32x32.png">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-business-solutions">
+
+    <!-- Site header (Business Solutions active) -->
+    <header class="site-header">
+        <a href="index.html" class="header-logo">
+            <img src="assets/LogoFlat.svg" alt="">
+        </a>
+        <nav class="site-nav">
+            <a href="business-solutions.html" class="nav-active">Business Solutions</a>
+            <a href="home-solutions.html">Home Solutions</a>
+            <a href="security.html">Security</a>
+            <a href="partners.html">Partners</a>
+        </nav>
+        <div class="header-actions">
+            <a href="login.html" class="btn-login">Login</a>
+            <a href="signup.html" class="btn-create">Create Account</a>
+        </div>
+    </header>
+
+    <main class="business-solutions-main">
+        <div class="business-solutions-inner">
+            <h1 class="tier-headline">Ready to get started with Sedona Networks subscription services?</h1>
+
+            <!-- Tier cards (hidden when subscription form is open) -->
+            <div id="business-tier-cards-section" class="business-tier-cards-section">
+                <div class="tier-cards">
+                    <article class="tier-card">
+                        <div class="tier-card-illustration">
+                            <img src="assets/starter_sedona.png" width="400" height="400" alt="Starter plan illustration" loading="lazy" decoding="async">
+                        </div>
+                        <div class="tier-card-body">
+                            <h2 class="tier-card-title">Starter</h2>
+                            <ul class="tier-features">
+                                <li>Network Performance Metrics</li>
+                                <li>Network Device Monitoring</li>
+                            </ul>
+                            <button type="button" class="btn-tier-get-started" data-open-business-form data-tier="starter">Get Started</button>
+                        </div>
+                    </article>
+                    <article class="tier-card">
+                        <div class="tier-card-illustration">
+                            <img src="assets/professional_sedona.png" width="400" height="400" alt="Professional plan illustration" loading="lazy" decoding="async">
+                        </div>
+                        <div class="tier-card-body">
+                            <h2 class="tier-card-title">Professional</h2>
+                            <ul class="tier-features">
+                                <li>Network Performance Metrics</li>
+                                <li>Network Device Monitoring</li>
+                                <li>Network Path Discovery &amp; Analysis</li>
+                            </ul>
+                            <button type="button" class="btn-tier-get-started" data-open-business-form data-tier="professional">Get Started</button>
+                        </div>
+                    </article>
+                    <article class="tier-card">
+                        <div class="tier-card-illustration">
+                            <img src="assets/enterprise_sedona.png" width="400" height="400" alt="Enterprise plan illustration" loading="lazy" decoding="async">
+                        </div>
+                        <div class="tier-card-body">
+                            <h2 class="tier-card-title">Enterprise</h2>
+                            <ul class="tier-features">
+                                <li>Network Performance Metrics</li>
+                                <li>Network Device Monitoring</li>
+                                <li>Network Path Discovery &amp; Analysis</li>
+                                <li>Support &amp; Services</li>
+                            </ul>
+                            <button type="button" class="btn-tier-get-started" data-open-business-form data-tier="enterprise">Get Started</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Subscription + contact form (shown after Get Started; no full page reload) -->
+            <div id="business-subscribe-panel" class="business-subscribe-panel" hidden>
+                <div class="business-subscribe-layout">
+                    <div class="business-subscribe-visual">
+                        <img
+                            src="assets/surface-XdWkFaHI97c-unsplash.jpg"
+                            srcset="assets/surface-XdWkFaHI97c-unsplash-p-500.jpeg 500w, assets/surface-XdWkFaHI97c-unsplash-p-1080.jpeg 1080w, assets/surface-XdWkFaHI97c-unsplash.jpg 1920w"
+                            sizes="(max-width: 900px) 100vw, 50vw"
+                            width="1920"
+                            height="1280"
+                            alt=""
+                            loading="lazy"
+                            decoding="async">
+                    </div>
+                    <div class="business-subscribe-form-wrap">
+                        <button type="button" class="business-form-back" id="business-form-back">← Back to plans</button>
+                        <form id="business-subscribe-form" class="business-subscribe-form" novalidate>
+                            <h2 class="business-form-section-title">Contact Information</h2>
+                            <div class="form-item">
+                                <label for="bs-fullname">Full name</label>
+                                <div class="input-group">
+                                    <input id="bs-fullname" name="fullname" type="text" autocomplete="name" placeholder="e.g. John Smith">
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <label for="bs-email">Email Address</label>
+                                <div class="input-group">
+                                    <input id="bs-email" name="email" type="email" autocomplete="email" placeholder="e.g. john@email.com">
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <label for="bs-company">Company name</label>
+                                <div class="input-group">
+                                    <input id="bs-company" name="company" type="text" autocomplete="organization" placeholder="e.g. Sedona Networks">
+                                </div>
+                            </div>
+
+                            <h2 class="business-form-section-title business-form-section-title--spaced">Subscription Service Details</h2>
+                            <div class="form-item">
+                                <label for="biz-subscription-type">Subscription Type</label>
+                                <div class="input-group input-group--select">
+                                    <select id="biz-subscription-type" name="subscription_type" aria-label="Subscription type">
+                                        <option value="starter">Starter</option>
+                                        <option value="professional">Professional</option>
+                                        <option value="enterprise">Enterprise</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <label for="bs-users">Number of Users</label>
+                                <div class="input-group">
+                                    <input id="bs-users" name="num_users" type="text" inputmode="numeric" placeholder="e.g. 10">
+                                </div>
+                            </div>
+                            <fieldset class="form-item business-form-fieldset">
+                                <legend class="business-form-legend">Select Add Ons</legend>
+                                <ul class="business-checkbox-list">
+                                    <li>
+                                        <label class="business-checkbox-label">
+                                            <input type="checkbox" name="addon_integrations" value="1">
+                                            <span>Integrations</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="business-checkbox-label">
+                                            <input type="checkbox" name="addon_success" value="1">
+                                            <span>Advance Success Plan</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="business-checkbox-label">
+                                            <input type="checkbox" name="addon_storage" value="1">
+                                            <span>Additional Storage</span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </fieldset>
+                            <div class="form-item">
+                                <label for="bs-term">Select Term Length</label>
+                                <div class="input-group input-group--select">
+                                    <select id="bs-term" name="term_length" aria-label="Term length">
+                                        <option value="">Select one…</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="annual">Annual</option>
+                                        <option value="multi">Multi-year</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-business-form-submit">Next</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-bar"></div>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo">
+                    <img src="assets/LogoFlat-Dark.svg" alt="">
+                </a>
+                <p class="footer-desc">Meet Sedona Networks. Powering the networks of the future. Software and hardware to keep you, your business, and your customers connected.</p>
+            </div>
+            <div class="footer-nav">
+                <div class="footer-col">
+                    <h4>Business Solutions</h4>
+                    <ul>
+                        <li><a href="business-solutions.html">Products</a></li>
+                        <li><a href="partners.html">Reseller Program</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Home Solutions</h4>
+                    <ul>
+                        <li><a href="home-solutions.html">Features</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Security</h4>
+                    <ul>
+                        <li><a href="security.html">Security</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Partners</h4>
+                    <ul>
+                        <li><a href="partners.html">Become a Partner</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-social">
+                <div class="social-links">
+                    <a href="#facebook" aria-label="Facebook"><img src="assets/ic-facebook-white.svg" alt=""></a>
+                    <a href="#instagram" aria-label="Instagram"><img src="assets/ic-instagram-white.svg" alt=""></a>
+                    <a href="#twitter" aria-label="Twitter"><img src="assets/ic-twitter-white.svg" alt=""></a>
+                    <a href="#linkedin" aria-label="LinkedIn"><img src="assets/ic-linkedin-white.svg" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/business-solutions.js"></script>
+</body>
+</html>
