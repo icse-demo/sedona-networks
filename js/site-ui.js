@@ -124,15 +124,21 @@ function displaySuccessMessage() {
   showToast('Success!');
 }
 
-/** After embedded signing completes, Ironclad enables #submit-button; then go to success page */
+/** After embedded signing completes, Ironclad enables the submit button; then go to success page. */
 function initSignupSignatureSubmitRedirect() {
   var submitBtn = document.getElementById('submit-button');
-  if (!submitBtn) {
-    return;
+  if (submitBtn) {
+    submitBtn.addEventListener('click', function () {
+      window.location.href = 'success.html';
+    });
   }
-  submitBtn.addEventListener('click', function () {
-    window.location.href = 'success.html';
-  });
+
+  var partnerSubmitBtn = document.getElementById('partner-embedded-submit-button');
+  if (partnerSubmitBtn) {
+    partnerSubmitBtn.addEventListener('click', function () {
+      window.location.href = 'success.html';
+    });
+  }
 }
 
 /* --- Password visibility toggle (login/signup) --- */

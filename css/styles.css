@@ -159,7 +159,7 @@ body.site-nav-open {
     height: 16px;
 }
 
-.clickwrap-container {
+.page-signup .clickwrap-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -168,13 +168,13 @@ body.site-nav-open {
     margin-bottom: 24px;
 }
 
-.clickwrap-container iframe {
+.page-signup .clickwrap-container iframe {
     width: 90%;
     height: 30px;
     border: none;
 }
 
-.clickwrap-container svg {
+.page-signup .clickwrap-container svg {
     width: 25px;
     height: 28px;
     flex-shrink: 0;
@@ -226,6 +226,7 @@ a:hover {
 }
 
 /* --- Loading overlay and signature iframe --- */
+/* Full-page overlay (signup / generic embedded path only). */
 #loading-container {
     display: flex;
     justify-content: center;
@@ -243,6 +244,28 @@ a:hover {
 }
 
 #loading-container.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Partners: loading is scoped to .partner-loading-host (not the whole site). */
+#partner-loading-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    box-sizing: border-box;
+    padding: 24px 16px;
+    background: rgba(11, 17, 32, 0.94);
+    border-radius: 16px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+
+#partner-loading-container.show {
     opacity: 1;
     visibility: visible;
 }
@@ -290,14 +313,16 @@ a:hover {
     40% { transform: scale(1.0); opacity: 1; }
 }
 
-#loading-message {
+#loading-message,
+#partner-loading-message {
     color: #1E0057;
     font-size: 1.1em;
     letter-spacing: 1px;
     min-height: 2em;
     transition: opacity 0.5s ease-in-out;
 }
-#loading-message.fade-out { opacity: 0; }
+#loading-message.fade-out,
+#partner-loading-message.fade-out { opacity: 0; }
 
 .progress-bar-container {
     width: 100%;
@@ -316,7 +341,7 @@ a:hover {
     transition: width 0.4s ease-in-out;
 }
 
-/* Signature modal (shown after clickwrap acceptance). */
+/* Signature modal (shown after clickwrap acceptance — fixed centered overlay). */
 #iframe-container {
     width: min(1000px, calc(100vw - 24px));
     max-width: 100%;
@@ -382,6 +407,58 @@ a:hover {
 }
 
 #submit-button:disabled {
+    background-image: none;
+    background-color: #a0aec0;
+    color: #e2e8f0;
+    cursor: not-allowed;
+    box-shadow: none;
+    filter: grayscale(50%);
+}
+
+/* Partner embedded signing: inline (in-flow) layout, not a modal. */
+#partner-iframe-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 16px auto 0;
+    padding: 15px;
+    background-color: #1E0057;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(100, 82, 255, 0.3);
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    box-sizing: border-box;
+}
+
+#partner-signature-iframe {
+    display: block;
+    width: 100%;
+    height: min(700px, 75vh);
+    border: none;
+    border-radius: 8px;
+    background: white;
+}
+
+#partner-embedded-submit-button {
+    align-self: flex-end;
+    margin-top: 12px;
+    background-image: linear-gradient(45deg, #7A57D4 0%, #1E0057 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(100, 82, 255, 0.3);
+    transition: all 0.25s ease;
+}
+
+#partner-embedded-submit-button:not(:disabled):hover {
+    transform: translateY(-3px) scale(1.05);
+}
+
+#partner-embedded-submit-button:disabled {
     background-image: none;
     background-color: #a0aec0;
     color: #e2e8f0;
@@ -1614,8 +1691,50 @@ html:has(.page-home) {
     opacity: 0.5;
 }
 
+/* Partner form + loading + signing: one continuous navy block above the white footer. */
+.partner-agreement-workspace {
+    background: #0b1120;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: max(48px, env(safe-area-inset-bottom));
+}
+
+.partner-loading-host {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+}
+
+.partner-loading-host:has(#partner-loading-container.show) {
+    min-height: min(65vh, 720px);
+}
+
+@media (max-width: 768px) {
+    .partner-loading-host:has(#partner-loading-container.show) {
+        min-height: min(52vh, 520px);
+    }
+
+    #partner-loading-container {
+        padding: 16px 12px;
+        border-radius: 12px;
+    }
+}
+
+.partner-loading-host .loading-box {
+    max-width: min(440px, 100%);
+    margin: 0 auto;
+}
+
 #partner-form.partners-form-section {
-    padding: 60px 24px 80px;
+    padding: 60px 24px 48px;
+}
+
+.partner-signing-section {
+    padding: 8px 24px 64px;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .partner-form-card {

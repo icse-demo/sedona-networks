@@ -1,5 +1,5 @@
 /**
- * Partners page: wire Submit to Ironclad embedded signing (displayClickwrapEmbeddedSigning).
+ * Partners page: wire Submit to partner embedded signing flow.
  */
 (function () {
   var btn = document.getElementById('btn-partner-submit');
@@ -8,8 +8,8 @@
   }
   btn.addEventListener('click', function (e) {
     e.preventDefault();
-    if (typeof displayClickwrapEmbeddedSigning === 'function') {
-      displayClickwrapEmbeddedSigning();
+    if (typeof displayPartnerEmbeddedSigning === 'function') {
+      displayPartnerEmbeddedSigning();
     }
   });
 })();

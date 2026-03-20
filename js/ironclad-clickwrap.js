@@ -104,7 +104,8 @@ function handleMessage(message) {
       console.log('signature iframe loaded');
       break;
     case 'sign':
-      var submitButton = document.getElementById('submit-button');
+      var submitButton = document.getElementById('partner-embedded-submit-button')
+        || document.getElementById('submit-button');
       if (submitButton) {
         submitButton.disabled = false;
       }
@@ -116,12 +117,14 @@ function handleMessage(message) {
 }
 
 /** Starts the loading animation and rotating messages (embedded signing only). */
-function startLoading(loadingContainer, loadingMessage) {
+function startLoading(loadingContainer, loadingMessage, progressBar) {
   if (!loadingContainer || !loadingMessage) {
     console.error('Loading elements not found!');
     return;
   }
-  var progressBar = document.getElementById('progress-bar');
+  if (!progressBar) {
+    progressBar = document.getElementById('progress-bar');
+  }
 
   var totalDuration = 9500;
   var updateFrequency = 50;
@@ -186,17 +189,17 @@ function requestEmbeddedSigningUrl() {
     },
     body: JSON.stringify({
       attributes: {
-        counterpartySignerEmail: 'brandon.to@ironcladhq.com',
-        counterpartySignerName: 'Brandon Test',
-        effectiveDate: '05/05/2026',
+        counterpartyName: document.getElementById('partner-company').value,
+        role699edbec23d5480b9012b2e42872ddc6: document.getElementById('partner-fullname').value,
+        role32f73a669e5e42a3923d4d6c5d8bd12e: document.getElementById('partner-email').value,
+        regions: Array.from(document.querySelectorAll('input[name="partner-region"]:checked')).map(cb => cb.value)
       },
       user: 'brandon.to@ironcladhq.com',
-      templateId: '698e55239f0b9d55d4bffdf0',
+      templateId: '67b78ebbd630012a1912b215',
       frameAncestor: 'https://icse-demo.github.io/',
       roleName: 'Counterparty Signer',
-      clientId: 'b07eab6b-bd50-4027-975f-bcb3bb4d762d',
-      clientSecret: '97df9830-1ae2-4631-b02c-f4c7a01fe275',
-      baseUrl: 'demo.ironcladapp.com',
+      clientId: '6e7852e3-c963-45b0-b959-be7a3b75b46d',
+      clientSecret: 'f4bd389a-40e5-4687-8cf7-b6c0b2374914',
     }),
   }).then(function (response) {
     if (!response.ok) {
@@ -293,5 +296,53 @@ function displayClickwrapEmbeddedSigning() {
       console.error('Script error:', error);
       alert('Error: ' + error.message);
       stopLoading(loadingContainer);
+    });
+}
+
+/**
+ * Partner embedded signing: validate, hide form, loading animation, API call, show iframe.
+ * No clickwrap acceptance required — partners sign via the embedded iframe directly.
+ */
+function displayPartnerEmbeddedSigning() {
+  if (typeof validatePartnerForm !== 'function' || !validatePartnerForm()) {
+    return;
+  }
+
+  var formCard = document.querySelector('.partner-form-card');
+  if (formCard) {
+    formCard.style.display = 'none';
+  }
+
+  var signatureIframe = document.getElementById('partner-signature-iframe');
+  if (signatureIframe) {
+    signatureIframe.addEventListener('load', function () {
+      window.addEventListener('message', handleMessage);
+    });
+  }
+
+  var loadingContainer = document.getElementById('partner-loading-container');
+  var loadingMessage = document.getElementById('partner-loading-message');
+  var progressBar = document.getElementById('partner-progress-bar');
+  startLoading(loadingContainer, loadingMessage, progressBar);
+
+  requestEmbeddedSigningUrl()
+    .then(function (signatureUrl) {
+      console.log('Signature URL found:', signatureUrl);
+
+      signatureIframe.src = signatureUrl;
+
+      stopLoading(loadingContainer);
+      var iframeContainer = document.getElementById('partner-iframe-container');
+      if (iframeContainer) {
+        iframeContainer.style.display = 'flex';
+      }
+    })
+    .catch(function (error) {
+      console.error('Script error:', error);
+      alert('Error: ' + error.message);
+      stopLoading(loadingContainer);
+      if (formCard) {
+        formCard.style.display = '';
+      }
     });
 }
