@@ -417,6 +417,7 @@ a:hover {
 
 /* Partner embedded signing: inline (in-flow) layout, not a modal. */
 #partner-iframe-container {
+    position: relative;
     width: 100%;
     max-width: 1000px;
     margin: 16px auto 0;
@@ -437,9 +438,21 @@ a:hover {
     width: 100%;
 }
 
-/* Ensure signing UI is fully removed from layout when hidden (replaced by success). */
-.partner-signing-panel[hidden] {
+/* Success is hidden until signing is finished (class on container — avoids [hidden] vs flex bugs). */
+#partner-iframe-container:not(.partner-signing-complete) .partner-signing-success {
     display: none !important;
+}
+
+#partner-iframe-container.partner-signing-complete .partner-signing-panel {
+    display: none !important;
+}
+
+#partner-iframe-container.partner-signing-complete .partner-signing-success {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 #partner-signature-iframe {
@@ -489,18 +502,9 @@ a:hover {
     text-align: center;
     /* Match iframe footprint so the white document area is visually replaced, not stacked below. */
     min-height: min(700px, 75vh);
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     box-sizing: border-box;
     border-radius: 8px;
     background: rgba(0, 0, 0, 0.2);
-}
-
-.partner-signing-success[hidden] {
-    display: none !important;
 }
 
 .partner-signing-success-title {

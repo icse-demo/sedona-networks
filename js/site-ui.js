@@ -136,17 +136,17 @@ function initSignupSignatureSubmitRedirect() {
   var partnerSubmitBtn = document.getElementById('partner-embedded-submit-button');
   if (partnerSubmitBtn) {
     partnerSubmitBtn.addEventListener('click', function () {
+      var container = document.getElementById('partner-iframe-container');
       var panel = document.getElementById('partner-signing-panel');
       var successEl = document.getElementById('partner-signing-success');
       var iframeEl = document.getElementById('partner-signature-iframe');
-      if (panel && successEl) {
+      if (container && panel && successEl) {
         if (iframeEl) {
           iframeEl.src = '';
         }
-        panel.hidden = true;
         panel.setAttribute('aria-hidden', 'true');
-        successEl.hidden = false;
-        successEl.removeAttribute('aria-hidden');
+        successEl.setAttribute('aria-hidden', 'false');
+        container.classList.add('partner-signing-complete');
         successEl.focus();
         successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } else {
