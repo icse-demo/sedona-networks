@@ -136,7 +136,20 @@ function initSignupSignatureSubmitRedirect() {
   var partnerSubmitBtn = document.getElementById('partner-embedded-submit-button');
   if (partnerSubmitBtn) {
     partnerSubmitBtn.addEventListener('click', function () {
-      window.location.href = 'success.html';
+      var panel = document.getElementById('partner-signing-panel');
+      var successEl = document.getElementById('partner-signing-success');
+      var iframeEl = document.getElementById('partner-signature-iframe');
+      if (panel && successEl) {
+        if (iframeEl) {
+          iframeEl.src = '';
+        }
+        panel.hidden = true;
+        successEl.hidden = false;
+        successEl.focus();
+        successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        window.location.href = 'success.html';
+      }
     });
   }
 }
