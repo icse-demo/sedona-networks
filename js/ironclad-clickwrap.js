@@ -116,7 +116,7 @@ function handleMessage(message) {
         partnerSubmitEnableTimerId = window.setTimeout(function () {
           partnerSubmitEnableTimerId = null;
           partnerBtn.disabled = false;
-        }, 2000);
+        }, 3000);
       } else if (genericBtn) {
         genericBtn.disabled = false;
       }
