@@ -96,6 +96,9 @@ if (ironcladIframe) {
   });
 }
 
+/* Partner: defer enabling outer Submit until Ironclad finishes its own completion UI (~2s). */
+var partnerSubmitEnableTimerId = null;
+
 /* --- Embedded signing: message handler (signature iframe) --- */
 function handleMessage(message) {
   console.log(message);
@@ -104,10 +107,18 @@ function handleMessage(message) {
       console.log('signature iframe loaded');
       break;
     case 'sign':
-      var submitButton = document.getElementById('partner-embedded-submit-button')
-        || document.getElementById('submit-button');
-      if (submitButton) {
-        submitButton.disabled = false;
+      var partnerBtn = document.getElementById('partner-embedded-submit-button');
+      var genericBtn = document.getElementById('submit-button');
+      if (partnerBtn) {
+        if (partnerSubmitEnableTimerId !== null) {
+          window.clearTimeout(partnerSubmitEnableTimerId);
+        }
+        partnerSubmitEnableTimerId = window.setTimeout(function () {
+          partnerSubmitEnableTimerId = null;
+          partnerBtn.disabled = false;
+        }, 2000);
+      } else if (genericBtn) {
+        genericBtn.disabled = false;
       }
       break;
     default:

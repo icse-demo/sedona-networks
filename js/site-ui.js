@@ -144,7 +144,9 @@ function initSignupSignatureSubmitRedirect() {
           iframeEl.src = '';
         }
         panel.hidden = true;
+        panel.setAttribute('aria-hidden', 'true');
         successEl.hidden = false;
+        successEl.removeAttribute('aria-hidden');
         successEl.focus();
         successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } else {

@@ -437,6 +437,11 @@ a:hover {
     width: 100%;
 }
 
+/* Ensure signing UI is fully removed from layout when hidden (replaced by success). */
+.partner-signing-panel[hidden] {
+    display: none !important;
+}
+
 #partner-signature-iframe {
     display: block;
     width: 100%;
@@ -482,12 +487,16 @@ a:hover {
 .partner-signing-success {
     padding: clamp(28px, 5vw, 48px) clamp(16px, 4vw, 32px);
     text-align: center;
-    min-height: min(320px, 45vh);
+    /* Match iframe footprint so the white document area is visually replaced, not stacked below. */
+    min-height: min(700px, 75vh);
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .partner-signing-success[hidden] {
