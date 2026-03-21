@@ -124,7 +124,7 @@ function displaySuccessMessage() {
   showToast('Success!');
 }
 
-/** After embedded signing completes, Ironclad enables the submit button; then go to success page. */
+/** After embedded signing completes, Ironclad enables the submit button; redirect to success (partner flow delayed). */
 function initSignupSignatureSubmitRedirect() {
   var submitBtn = document.getElementById('submit-button');
   if (submitBtn) {
@@ -136,22 +136,10 @@ function initSignupSignatureSubmitRedirect() {
   var partnerSubmitBtn = document.getElementById('partner-embedded-submit-button');
   if (partnerSubmitBtn) {
     partnerSubmitBtn.addEventListener('click', function () {
-      var container = document.getElementById('partner-iframe-container');
-      var panel = document.getElementById('partner-signing-panel');
-      var successEl = document.getElementById('partner-signing-success');
-      var iframeEl = document.getElementById('partner-signature-iframe');
-      if (container && panel && successEl) {
-        if (iframeEl) {
-          iframeEl.src = '';
-        }
-        panel.setAttribute('aria-hidden', 'true');
-        successEl.setAttribute('aria-hidden', 'false');
-        container.classList.add('partner-signing-complete');
-        successEl.focus();
-        successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      } else {
-        window.location.href = 'success.html';
-      }
+      partnerSubmitBtn.disabled = true;
+      window.setTimeout(function () {
+        window.location.href = 'partner-success.html';
+      }, 3000);
     });
   }
 }
