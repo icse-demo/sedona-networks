@@ -3,7 +3,7 @@
  * Sections: base, form/card, loading/iframe, site header, home, footer,
  * login, signup, partners, home-solutions, business-solutions, security.
  */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700;800&family=Open+Sans:wght@400;600;700;800&display=swap');
 
 /* --- Base --- */
 :root {
@@ -772,11 +772,11 @@ a:hover {
 /* ========== Home page layout ========== */
 /* Match <html> to home body so no thin strip of default #f7f7f7 shows between sections on resize. */
 html:has(.page-home) {
-    background-color: #141d3e;
+    background-color: #0b1430;
 }
 
 .page-home {
-    background: #141d3e;
+    background: #0b1430;
     min-height: 100vh;
     min-height: 100dvh;
     padding-top: 64px;
@@ -803,7 +803,7 @@ html:has(.page-home) {
     margin: 0 auto;
     width: 100%;
     box-sizing: border-box;
-    background: #141d3e;
+    background: #0b1430;
     position: relative;
     z-index: 0;
 }
@@ -820,28 +820,51 @@ html:has(.page-home) {
     text-align: center;
     width: 100%;
     max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .hero-title {
-    font-size: clamp(2rem, 5vw, 3.25rem);
-    font-weight: 700;
+    font-family: "Inter", "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: clamp(2.5rem, 6vw, 3.75rem);
+    font-weight: 800;
+    font-synthesis: none;
+    letter-spacing: -0.03em;
     color: #fff;
     margin: 0;
-    line-height: 1.2;
+    line-height: 1.06;
+    text-wrap: balance;
+    overflow-wrap: break-word;
+    text-decoration: none;
+}
+
+/* Keeps "of the Future" on one line; narrow screens use slightly smaller min size (see below). */
+.hero-title-tail {
+    white-space: nowrap;
+}
+
+@media (max-width: 420px) {
+    .hero-title {
+        font-size: clamp(2rem, 5.5vw, 3.75rem);
+        line-height: 1.1;
+        letter-spacing: -0.025em;
+    }
 }
 
 .hero-title .glitch-word {
     position: relative;
     display: inline-block;
+    text-decoration: none;
 }
 
 .hero-title .hero-future-word::after {
     content: "";
     position: absolute;
-    left: -4%;
-    right: -4%;
-    bottom: -6px;
-    height: 14px;
+    left: -5%;
+    right: -5%;
+    bottom: -0.12em;
+    height: 0.42em;
+    min-height: 12px;
     background: url('../assets/scribble.svg') no-repeat center bottom;
     background-size: 100% auto;
     pointer-events: none;
@@ -938,7 +961,7 @@ html:has(.page-home) {
     padding: 80px 24px;
     max-width: 1200px;
     margin: 0 auto;
-    background: #141d3e;
+    background: #0b1430;
     position: relative;
     z-index: 0;
 }
@@ -1000,7 +1023,7 @@ html:has(.page-home) {
 /* Home: logo carousel strip (dark, full width) */
 .section-carousel-strip {
     width: 100%;
-    background: #141d3e;
+    background: #0b1430;
     padding: 48px 0 56px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     box-sizing: border-box;
@@ -1011,10 +1034,11 @@ html:has(.page-home) {
 
 .section-carousel-strip .logo-carousel-wrap {
     margin-bottom: 0;
-    max-width: 1200px;
+    max-width: none;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 24px;
+    padding: 0;
     box-sizing: border-box;
     overflow-x: clip;
 }
@@ -1079,7 +1103,7 @@ html:has(.page-home) {
 /* Home: Become a partner (navy band after white CTA) */
 .section-partner-cta {
     width: 100%;
-    background: #141d3e;
+    background: #0b1430;
     padding: 72px 24px 88px;
     box-sizing: border-box;
 }
@@ -1214,9 +1238,23 @@ html:has(.page-home) {
 
 .logo-carousel {
     display: flex;
-    gap: 48px;
+    align-items: center;
+    gap: 0;
     animation: carousel-scroll 35s linear infinite;
     width: max-content;
+    backface-visibility: hidden;
+}
+
+/* Four identical sets, gap 0 between sets; each set ends with padding matching inner `gap` so
+   translate3d(-25%,0,0) equals one full cycle (100% / 4). Extra copies keep wide viewports filled. */
+.logo-carousel-set {
+    --logo-carousel-gap: 48px;
+    display: flex;
+    align-items: center;
+    gap: var(--logo-carousel-gap);
+    flex-shrink: 0;
+    box-sizing: content-box;
+    padding-inline-end: var(--logo-carousel-gap);
 }
 
 .logo-carousel img {
@@ -1228,8 +1266,15 @@ html:has(.page-home) {
 }
 
 @keyframes carousel-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-25%, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .logo-carousel {
+        animation: none;
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 .cta-two-col {
@@ -1749,31 +1794,15 @@ html:has(.page-home) {
     overflow-x: clip;
 }
 
-/* .section-carousel-strip {
-    width: 100%;
-    background: #141d3e;
-    padding: 48px 0 56px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    box-sizing: border-box;
-    position: relative;
-    z-index: 0;
-}
-
-.section-carousel-strip .logo-carousel-wrap {
-    margin-bottom: 0;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 24px;
-    box-sizing: border-box;
-} */
-
+/* Match home `.section-carousel-strip .logo-carousel-wrap`: full-bleed clip so `.logo-carousel`
+   `width: max-content` + translate3d(-25%,…) loop math is consistent (same track, same % base). */
 .partners-logos .logo-carousel-wrap {
     margin-bottom: 0;
-    max-width: 1200px;
+    max-width: none;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 24px;
+    padding: 0;
     box-sizing: border-box;
     overflow-x: clip;
 }

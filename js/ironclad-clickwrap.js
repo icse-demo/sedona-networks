@@ -89,19 +89,11 @@ function handleCWMessage(message) {
   }
 }
 
-var ironcladIframe = document.getElementById('my-iframe');
-if (ironcladIframe) {
-  ironcladIframe.addEventListener('load', function () {
-    window.addEventListener('message', handleCWMessage);
-  });
-}
-
 /* Partner: defer enabling outer Submit until Ironclad finishes its own completion UI (~2s). */
 var partnerSubmitEnableTimerId = null;
 
-/* --- Embedded signing: message handler (signature iframe) --- */
-function handleMessage(message) {
-  console.log(message);
+/* --- Embedded signing: signature iframe postMessage (types: load, sign) --- */
+function handleEmbeddedSigningMessage(message) {
   switch (message.data.type) {
     case 'load':
       console.log('signature iframe loaded');
@@ -122,10 +114,29 @@ function handleMessage(message) {
       }
       break;
     default:
-      console.error('invalid message', { message: message });
       break;
   }
 }
+
+/**
+ * Single window listener: routes Ironclad clickwrap vs embedded signing without stacking
+ * duplicate handlers on iframe reload.
+ */
+function routeIroncladPostMessage(event) {
+  if (event.origin === CLICKWRAP_IFRAME_ORIGIN) {
+    handleCWMessage(event);
+    return;
+  }
+  var data = event.data;
+  if (!data || typeof data.type !== 'string') {
+    return;
+  }
+  if (data.type === 'load' || data.type === 'sign') {
+    handleEmbeddedSigningMessage(event);
+  }
+}
+
+window.addEventListener('message', routeIroncladPostMessage);
 
 /** Starts the loading animation and rotating messages (embedded signing only). */
 function startLoading(loadingContainer, loadingMessage, progressBar) {
@@ -244,9 +255,6 @@ function displayClickwrapClickToAccept() {
 
   var signatureIframe = document.getElementById('signature-iframe');
   if (signatureIframe) {
-    signatureIframe.addEventListener('load', function () {
-      window.addEventListener('message', handleMessage);
-    });
     console.log('iframe loaded');
   } else {
     console.log('iframe not yet loaded');
@@ -279,9 +287,6 @@ function displayClickwrapEmbeddedSigning() {
 
   var signatureIframe = document.getElementById('signature-iframe');
   if (signatureIframe) {
-    signatureIframe.addEventListener('load', function () {
-      window.addEventListener('message', handleMessage);
-    });
     console.log('iframe loaded');
   } else {
     console.log('iframe not yet loaded');
@@ -325,11 +330,6 @@ function displayPartnerEmbeddedSigning() {
   }
 
   var signatureIframe = document.getElementById('partner-signature-iframe');
-  if (signatureIframe) {
-    signatureIframe.addEventListener('load', function () {
-      window.addEventListener('message', handleMessage);
-    });
-  }
 
   var loadingContainer = document.getElementById('partner-loading-container');
   var loadingMessage = document.getElementById('partner-loading-message');

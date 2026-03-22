@@ -191,6 +191,7 @@ function initSiteUiReady() {
   initScrollAnimations();
 }
 
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initSiteUiReady);
 } else {
