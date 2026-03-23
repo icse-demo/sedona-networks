@@ -186,7 +186,7 @@ function initScrollAnimations() {
   });
 }
 
-/* --- Signup: 1s minimum buffer before clickwrap is interactive --- */
+/* --- Signup: spinner while Ironclad clickwrap iframe loads --- */
 function initSignupClickwrapReadyGate() {
   if (!document.body.classList.contains('page-signup')) {
     return;
@@ -202,10 +202,12 @@ function initSignupClickwrapReadyGate() {
   submitBtn.disabled = true;
   container.setAttribute('aria-busy', 'true');
 
-  var t0 = performance.now();
-  var loaded = false;
+  var spinner = document.createElement('div');
+  spinner.className = 'clickwrap-spinner';
+  spinner.setAttribute('aria-hidden', 'true');
+  container.appendChild(spinner);
+
   var revealed = false;
-  var MIN_DELAY = 1000;
   var FALLBACK_CEILING = 7000;
 
   function reveal() {
@@ -218,21 +220,10 @@ function initSignupClickwrapReadyGate() {
     submitBtn.disabled = false;
   }
 
-  function tryReveal() {
-    if (revealed) {
-      return;
-    }
-    if (loaded && performance.now() - t0 >= MIN_DELAY) {
-      reveal();
-    }
-  }
-
   iframe.addEventListener('load', function () {
-    loaded = true;
-    tryReveal();
+    reveal();
   }, { once: true });
 
-  window.setTimeout(tryReveal, MIN_DELAY);
   window.setTimeout(reveal, FALLBACK_CEILING);
 }
 

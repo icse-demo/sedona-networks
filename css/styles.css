@@ -181,24 +181,53 @@ body.site-nav-open {
     gap: 16px;
     margin-top: 24px;
     margin-bottom: 24px;
-    opacity: 0;
-    transition: opacity 0.35s ease;
-}
-
-.page-signup .clickwrap-container.clickwrap-container--ready {
-    opacity: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .page-signup .clickwrap-container {
-        transition: none;
-    }
+    position: relative;
+    min-height: 30px;
 }
 
 .page-signup .clickwrap-container iframe {
     width: 90%;
     height: 30px;
     border: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.page-signup .clickwrap-container.clickwrap-container--ready iframe {
+    opacity: 1;
+}
+
+/* Spinner shown while iframe loads; removed by JS via --ready class. */
+.clickwrap-spinner {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border: 2px solid #e2e8f0;
+    border-top-color: #2563eb;
+    border-radius: 50%;
+    animation: clickwrap-spin 0.6s linear infinite;
+    pointer-events: none;
+}
+
+.clickwrap-container--ready .clickwrap-spinner {
+    display: none;
+}
+
+@keyframes clickwrap-spin {
+    to { transform: translateY(-50%) rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-signup .clickwrap-container iframe {
+        transition: none;
+    }
+    .clickwrap-spinner {
+        animation: none;
+        border-top-color: #2563eb;
+    }
 }
 
 .page-signup .clickwrap-container svg {
