@@ -181,6 +181,18 @@ body.site-nav-open {
     gap: 16px;
     margin-top: 24px;
     margin-bottom: 24px;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.page-signup .clickwrap-container.clickwrap-container--ready {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-signup .clickwrap-container {
+        transition: none;
+    }
 }
 
 .page-signup .clickwrap-container iframe {
@@ -1958,13 +1970,31 @@ html:has(.page-home) {
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 40px;
+}
+
+@media (max-width: 1023px) {
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .product-card:nth-child(3) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        max-width: min(400px, 100%);
+    }
 }
 
 @media (max-width: 768px) {
     .product-grid {
         grid-template-columns: 1fr;
+    }
+
+    .product-card:nth-child(3) {
+        grid-column: auto;
+        justify-self: stretch;
+        max-width: none;
     }
 }
 
@@ -1972,6 +2002,7 @@ html:has(.page-home) {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    min-width: 0;
 }
 
 .product-card-image {

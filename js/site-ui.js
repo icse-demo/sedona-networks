@@ -186,9 +186,60 @@ function initScrollAnimations() {
   });
 }
 
+/* --- Signup: 1s minimum buffer before clickwrap is interactive --- */
+function initSignupClickwrapReadyGate() {
+  if (!document.body.classList.contains('page-signup')) {
+    return;
+  }
+
+  var iframe = document.getElementById('my-iframe');
+  var submitBtn = document.getElementById('btn-signup-submit');
+  var container = iframe ? iframe.closest('.clickwrap-container') : null;
+  if (!iframe || !submitBtn || !container) {
+    return;
+  }
+
+  submitBtn.disabled = true;
+  container.setAttribute('aria-busy', 'true');
+
+  var t0 = performance.now();
+  var loaded = false;
+  var revealed = false;
+  var MIN_DELAY = 1000;
+  var FALLBACK_CEILING = 7000;
+
+  function reveal() {
+    if (revealed) {
+      return;
+    }
+    revealed = true;
+    container.classList.add('clickwrap-container--ready');
+    container.setAttribute('aria-busy', 'false');
+    submitBtn.disabled = false;
+  }
+
+  function tryReveal() {
+    if (revealed) {
+      return;
+    }
+    if (loaded && performance.now() - t0 >= MIN_DELAY) {
+      reveal();
+    }
+  }
+
+  iframe.addEventListener('load', function () {
+    loaded = true;
+    tryReveal();
+  }, { once: true });
+
+  window.setTimeout(tryReveal, MIN_DELAY);
+  window.setTimeout(reveal, FALLBACK_CEILING);
+}
+
 function initSiteUiReady() {
   initSignupSignatureSubmitRedirect();
   initScrollAnimations();
+  initSignupClickwrapReadyGate();
 }
 
 
